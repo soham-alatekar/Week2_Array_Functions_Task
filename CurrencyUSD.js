@@ -3,18 +3,17 @@ request.open('GET', 'https://restcountries.eu/rest/v2/all', true);
 request.send();
 request.onload = function(){
     var data = JSON.parse(this.response);
-    //let countries =  Object.values(data).filter((element) => {
-    //        return element.currencies ==  ;
-    //})
+    var res = [];
+    let countries =  Object.values(data).map((element) => {
+        let curr = element.currencies  ;
+        for(var i = 0 ; i<curr.length ; i++)
+        {
+            if(curr[i].code == "USD")
+            {
+                res.push(element.name);
+            }
+        }
+    })
 
-    for(var i of data)
-    {
-        console.log(i.currencies);
-    }
-    
-
-  //  for(var j of countries)
-   // {
-    //    console.log(j.name +"   "+ j.currencies.name);
-    //}    
+    console.log(res);     
 }
